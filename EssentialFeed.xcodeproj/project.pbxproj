@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		291445D223F1CE4B00BFEA05 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291445C823F1CE4B00BFEA05 /* EssentialFeed.framework */; };
 		291445D723F1CE4B00BFEA05 /* EssentialFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291445D623F1CE4B00BFEA05 /* EssentialFeedTests.swift */; };
+		291445E523F1D22700BFEA05 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291445E423F1D22700BFEA05 /* FeedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 		291445D123F1CE4B00BFEA05 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		291445D623F1CE4B00BFEA05 /* EssentialFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedTests.swift; sourceTree = "<group>"; };
 		291445D823F1CE4B00BFEA05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		291445E423F1D22700BFEA05 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				291445CC23F1CE4B00BFEA05 /* Info.plist */,
+				291445E423F1D22700BFEA05 /* FeedItem.swift */,
 			);
 			path = EssentialFeed;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				291445E523F1D22700BFEA05 /* FeedItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +389,7 @@
 		291445E023F1CE4B00BFEA05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EssentialFeedTests/Info.plist;
@@ -402,6 +407,7 @@
 		291445E123F1CE4B00BFEA05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EssentialFeedTests/Info.plist;
