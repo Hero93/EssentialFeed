@@ -13,6 +13,8 @@ import Foundation
 
 // We don't need to create a new type to conform to it, we can easily create an extension on URLSession or Alamofire.
 
+// It's public because it can be implemented by external modules
+
 public protocol HTTPClient {
     func get(from url: URL)
 }
@@ -20,11 +22,12 @@ public protocol HTTPClient {
 // "RemoteFeedLoader" will not depend on concrete type like URLSession but by creating a clean separation between protocols,
 // we make the RemoteFeedLoader more flexible, open for extensions and more testable.
 
+// It's public because it can be implemented and created by external modules
 
 public class RemoteFeedLoader {
     
-    let client: HTTPClient
-    let url: URL
+    private let url: URL
+    private let client: HTTPClient
     
     // The "RemoteFeedLoader" doesn't need to locate or instantiate the HTTPClient instance.
     // We can make our code more modular, by injecting the HTTPClient as a dependency. (Open/Close principle)
