@@ -31,8 +31,30 @@ class RemoteFeedLoaderTests: XCTestCase {
         // Act
         sut.load()
         
+        // When testing objects collaborating, asserting the values passed is not enough.
+        // We also need to ask, how many times was the method invoked ?
+        
         // Assert
         XCTAssertNotNil(client.requestedURL)
+    }
+    
+    func test_loadTwice_requestsDataFromURLTwice() {
+        // Arrange
+        let url = URL(string: "http://a-url.com")!
+        let (sut, client) = makeSUT(url: url)
+        
+        // Act
+        
+        // By mistake the client get called twice (it can happend after a git merge)
+        
+        sut.load()
+        sut.load()
+        
+        // When testing objects collaborating, asserting the values passed is not enough.
+        // We also need to ask, how many times was the method invokd ?
+        
+        // Assert
+        XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
     // MARK: Helpers
@@ -46,9 +68,11 @@ class RemoteFeedLoaderTests: XCTestCase {
     private class HTTPClientSpy: HTTPClient {
         
         var requestedURL: URL?
+        var requestedURLs = [URL]()
         
         func get(from url: URL) {
             requestedURL = url
+            requestedURLs.append(url)
         }
     }
 }
