@@ -16,7 +16,7 @@ import Foundation
 // It's public because it can be implemented by external modules
 
 public enum HTTPClientResult {
-    case success(HTTPURLResponse)
+    case success(Data, HTTPURLResponse)
     case failure(Error)
 }
 
