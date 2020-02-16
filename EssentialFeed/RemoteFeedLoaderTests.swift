@@ -78,7 +78,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
 
         // Act
-        var samples = [199, 201, 300, 400, 500]
+        let samples = [199, 201, 300, 400, 500]
         samples.enumerated().forEach { index, code in
             
             var capturedErrors = [RemoteFeedLoader.Error]()
