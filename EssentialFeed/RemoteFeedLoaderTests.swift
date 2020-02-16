@@ -59,6 +59,12 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     func test_load_deliverErrorOnClientError() {
         let (sut, client) = makeSUT()
+        // We are mixing concepts: stubbing an capturing values.
+        // Here we stub the client even though is a spy and before call "load" -> that doesn't
+        // reflect the async nature of this behaviour.
+        
+        // we want to keep the spy a spy: just capturing data instead of stubbing it with some behaviour
+        
         client.error = NSError(domain: "Test", code: 0)
         
         var capturedErrors = [RemoteFeedLoader.Error]()
