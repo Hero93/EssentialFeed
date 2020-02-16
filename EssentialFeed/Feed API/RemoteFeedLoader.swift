@@ -16,7 +16,7 @@ import Foundation
 // It's public because it can be implemented by external modules
 
 public protocol HTTPClient {
-    func get(from url: URL)
+    func get(from url: URL, completion: @escaping (Error) -> Void)
 }
 
 // "RemoteFeedLoader" will not depend on concrete type like URLSession but by creating a clean separation between protocols,
@@ -34,12 +34,19 @@ public class RemoteFeedLoader {
     
     // Usually the HTTPClient is created as a Singleton -> by doing this I introduce high coupoling between the modules.
     
+    // This error is in the domain of the implementation of the HTTPClient
+    public enum Error: Swift.Error {
+        case connectivity
+    }
+    
     public init(url: URL, client: HTTPClient) {
         self.client = client
         self.url = url
     }
     
-    public func load() {
-        client.get(from: url)
+    public func load(completion: @escaping (Error)-> Void = { _ in }) {
+        client.get(from: url) { error in
+            completion(.connectivity)
+        }
     }
 }
