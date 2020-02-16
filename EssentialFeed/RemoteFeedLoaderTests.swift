@@ -103,13 +103,13 @@ class RemoteFeedLoaderTests: XCTestCase {
                         file: StaticString = #file,
                         line: UInt = #line) {
                 
-        var capturedErrors = [RemoteFeedLoader.Error]()
-        sut.load() { capturedErrors.append($0) }
+        var capturedResults = [RemoteFeedLoader.Result]()
+        sut.load() { capturedResults.append($0) }
                 
         action()
         
         // When the test fails, it fails in the exact line, not here.
-        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
+        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
     }
     
     // The spy job is to capture the messages (invokations) in a clear way.
