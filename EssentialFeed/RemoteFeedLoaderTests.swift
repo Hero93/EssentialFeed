@@ -97,8 +97,10 @@ class RemoteFeedLoaderTests: XCTestCase {
         var capturedErrors = [RemoteFeedLoader.Error]()
         sut.load() { capturedErrors.append($0) }
         
-        let invalidJson = Data(base64Encoded: "invalid json")!
+        let invalidJson = Data("invalid json".utf8)
         client.complete(withStatusCode: 200, data: invalidJson)
+        
+        XCTAssertEqual(capturedErrors, [.inavalidData])
     }
     
     // MARK: Helpers
