@@ -16,7 +16,7 @@ import Foundation
 // It's public because it can be implemented by external modules
 
 public protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (Error) -> Void)
+    func get(from url: URL, completion: @escaping (Error?, HTTPURLResponse?) -> Void)
 }
 
 // "RemoteFeedLoader" will not depend on concrete type like URLSession but by creating a clean separation between protocols,
@@ -37,6 +37,7 @@ public class RemoteFeedLoader {
     // This error is in the domain of the implementation of the HTTPClient
     public enum Error: Swift.Error {
         case connectivity
+        case inavalidData
     }
     
     public init(url: URL, client: HTTPClient) {
@@ -45,8 +46,12 @@ public class RemoteFeedLoader {
     }
     
     public func load(completion: @escaping (Error)-> Void) {
-        client.get(from: url) { error in
-            completion(.connectivity)
+        client.get(from: url) { error, response  in
+            if response != nil {
+                completion(.inavalidData)
+            } else {
+                completion(.connectivity)
+            }
         }
     }
 }
