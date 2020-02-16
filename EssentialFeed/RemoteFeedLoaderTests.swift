@@ -29,7 +29,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT(url: url)
         
         // Act
-        sut.load()
+        sut.load() { _ in }
         
         // When testing objects collaborating, asserting the values passed is not enough.
         // We also need to ask, how many times was the method invoked ?
@@ -47,8 +47,8 @@ class RemoteFeedLoaderTests: XCTestCase {
         
         // By mistake the client get called twice (it can happend after a git merge)
         
-        sut.load()
-        sut.load()
+        sut.load() { _ in }
+        sut.load() { _ in }
         
         // When testing objects collaborating, asserting the values passed is not enough.
         // We also need to ask, how many times was the method invokd ?
