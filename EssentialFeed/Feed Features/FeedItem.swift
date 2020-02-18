@@ -22,14 +22,18 @@ public struct FeedItem: Equatable {
     }
 }
 
+// this "image" keypath string it's API specific. If it changes in the API, we might break other
+// models that have nothing to do with the API.
+// The problem is that I can only have one decodable extension per module.
+
+// The solution is to create another object that represents the transitional data of a FeedItem.
+// From "FeedItem" API representation to a "FeedItem".
+
 extension FeedItem: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id
         case description
         case location
-        // this "image" keypath string it's API specific. If it changes in the API, we might break other
-        // models that have nothing to do with the API.
-        // The problem is that I can only have one decodable extension per module.
         case imageURL = "image"
     }
 }
