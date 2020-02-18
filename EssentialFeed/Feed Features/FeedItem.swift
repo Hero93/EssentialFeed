@@ -27,6 +27,9 @@ extension FeedItem: Decodable {
         case id
         case description
         case location
+        // this "image" keypath string it's API specific. If it changes in the API, we might break other
+        // models that have nothing to do with the API.
+        // The problem is that I can only have one decodable extension per module.
         case imageURL = "image"
     }
 }
