@@ -59,8 +59,8 @@ public class RemoteFeedLoader {
         client.get(from: url) { response in
             
             switch response {
-            case .success(let data, _):
-                if let root = try? JSONDecoder().decode(Root.self, from: data) {
+            case .success(let data, let response):
+                if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
                     completion(.success(root.items))
                 } else {
                     completion(.failure(.inavalidData))
