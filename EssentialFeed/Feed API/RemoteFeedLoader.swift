@@ -40,10 +40,22 @@ public class RemoteFeedLoader {
     }
     
     public func load(completion: @escaping (Result)-> Void) {
-        client.get(from: url) { response in
+        client.get(from: url) { [weak self] response in
+            
+            // this is to prevent the completion block to be called after client
+            // instance has been deallocated.
+            
+            guard self != nil else { return }
             
             switch response {
             case .success(let data, let response):
+                // By using the static "FeedItemMapper". Even if the instance of "RemoteFeedLoader"
+                // has been deallocated, the completion block will be executed.
+                // This is because we don't know the implementation of the Client, maybe its a Singleton,
+                // and it leaves longer than the "RemoteFeedLoader".
+                // This might be a bug, because the consumer of this "RemoteFeedLoader", they not expect
+                // the completion block to be invoked, after the instance has been deallocated.
+                // ** We must instruct the "RemoteFeedLoader" to prevent this problem **
                 completion(FeedItemMapper.map(data, from: response))
                 
             case .failure:
