@@ -13,7 +13,7 @@ import Foundation
 
 // It's public because it can be implemented and created by external modules
 
-public class RemoteFeedLoader {
+public class RemoteFeedLoader: FeedLoader {
     
     private let url: URL
     private let client: HTTPClient
