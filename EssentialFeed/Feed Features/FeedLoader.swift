@@ -8,11 +8,17 @@
 
 import Foundation
 
-enum LoadFeedResult {
+// This is production code and we are only making LoadFeedResult equatable in order to do a test.
+
+public enum LoadFeedResult<Error: Swift.Error> {
     case success([FeedItem])
-    case error(Error)
+    case failure(Error)
 }
 
+extension LoadFeedResult: Equatable where Error: Equatable {}
+
 protocol FeedLoader {
-    func load(completion: @escaping (LoadFeedResult) -> Void)
+    associatedtype Error: Swift.Error
+    
+    func load(completion: @escaping (LoadFeedResult<Error>) -> Void)
 }
