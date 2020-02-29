@@ -29,7 +29,7 @@ public class RemoteFeedLoader: FeedLoader {
         case inavalidData
     }
     
-    public typealias Result = LoadFeedResult<Error>
+    public typealias Result = LoadFeedResult
     
     public init(url: URL, client: HTTPClient) {
         self.client = client
