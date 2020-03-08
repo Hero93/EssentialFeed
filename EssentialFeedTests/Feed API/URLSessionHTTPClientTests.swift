@@ -23,19 +23,8 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    // This 2 test check exacly the implementation of URLSession class
-    // but we don't want that.
-    // We don't own this class so it's better to check the behaviour not the implementation
-    
-    func test_getFromURL_createsDataTaskWithURL() {
-        let url = URL(string: "http://any-url.com")!
-        let session = URLSessionSpy()
-        let sut = URLSessionHTTPClient(session: session)
-        
-        sut.get(from: url)
-        
-        XCTAssertEqual(session.receivedURLs, [url])
-    }
+    // This test check exacly the implementation of URLSession class, but we don't want that.
+    // We don't own "URLSession" so it's better to check the behaviour not the implementation.
     
     func test_getFromURL_resumesDataTaskWithURL() {
         let url = URL(string: "http://any-url.com")!
@@ -60,11 +49,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     // We can start to create assumption, in our mock classes, that can be wrong.
     
     private class URLSessionSpy: URLSession {
-        
-        // We want to check that "URLSession" class receives the correct url
-        // but We don't have access to the received urls so we need to "spy" the class.
-        var receivedURLs = [URL]()
-        
+
         private var stubs = [URL: URLSessionDataTask]()
         
         override init() {}
@@ -74,7 +59,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-            receivedURLs.append(url)
             return stubs[url] ?? FakeURLSessionDataTask()
         }
     }
