@@ -2,4 +2,4 @@ os: osx
 osx_image: xcode11.3
 language: swift
 xcode_project: /Users/lucagramaglia/Documents/Programming/EssentialFeed
-script: xcodebuild clean build test -project EssentialFeed/EssentialFeed.xcodeproj -scheme "CI" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+script: xcodebuild clean build test -project EssentialFeed.xcodeproj -scheme "CI" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
